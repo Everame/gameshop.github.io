@@ -1,0 +1,17 @@
+.linkBtn{
+    padding: calc(var(--index) * 0.5) var(--index);
+    border: 3px solid var(--focus-color);
+    text-decoration: none;
+    transition: all 0.4s ease;
+    .text{
+        color: #fff;
+        font-size: calc(var(--index) * 0.8);
+    }
+    &:hover{
+        background-color: #fff;
+        border: 3px solid #000;
+        .text{
+            color: #000;
+        }
+    }
+}
