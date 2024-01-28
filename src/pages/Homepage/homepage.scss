@@ -1,0 +1,11 @@
+.bodyBlock{
+    margin: calc(var(--index) * 0.5) var(--index);;
+}
+
+#gamesGrid{
+    display: grid;
+    box-sizing: border-box;
+    gap: 20px;
+    grid-template-columns: 24% 24% 24% 25%;
+    margin: calc(var(--index) * 1.5) 0;
+}
