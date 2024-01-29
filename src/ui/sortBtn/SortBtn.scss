@@ -1,0 +1,21 @@
+.sortBtn{
+    padding: calc(var(--index) * 0.5) var(--index);
+    text-decoration: none;
+    transition: all 0.4s ease;
+    box-shadow: none;
+    border: none;
+    margin: 0 30px 0 0;
+    cursor: pointer;
+    border-radius: calc(var(--index) * 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .btnTitle{
+        color: #fff;
+        font-size: calc(var(--index) * 0.6);
+    }
+    svg{
+        color: #fff;
+        margin-left: calc(var(--index) * 0.4);
+    }
+}

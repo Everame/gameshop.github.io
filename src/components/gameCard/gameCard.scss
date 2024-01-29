@@ -3,9 +3,25 @@
     width: claim(20%, 25%, 23%);
     border-radius: calc(var(--index) * 2);
     background-position: center;
-    background-repeat: none;
+    background-repeat: no-repeat;
     background-size: cover;
     position: relative;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    &:hover{
+        transform: scale(1.01);
+        #infoBlock{
+            opacity: 0;
+            height: 0;
+            min-height: 0;
+            .statRow{
+                opacity: 0;
+            }
+            h4{
+                opacity: 0;
+            }
+        }
+    }
     #infoBlock{
         min-height: 35%;
         width: 100%;
@@ -15,11 +31,18 @@
         bottom: 0;
         padding: calc(var(--index) * 0.7) calc(var(--index) * 0.7);
         border-radius: 0 0 calc(var(--index) * 1.8) calc(var(--index) * 1.8);
-        .statRow{
+        transition: all 0.3s ease;
+        #statRow{
             display: flex;
+            width: 100%;
             align-items: center;
             justify-content: space-between;
-            padding: calc(var(--index) * 0.5) 0;
+            #rate{
+                color: #fff;
+            }
+            #relizeDate{
+                color: var(--grey-txt-color);
+            }
         }
     }
 }

@@ -10,6 +10,7 @@ header{
         align-items: center;
         justify-content: flex-start;
         text-decoration: none;
+        outline: none;
         .green{
             color: var(--green);
         }
@@ -32,6 +33,7 @@ header{
             right: 15px;
             font-size: calc(var(--index) * 0.7);
             cursor: pointer;
+            display: none;
         }
         #search{
             border: none;
@@ -47,6 +49,12 @@ header{
             }
             &:focus{
                 background-color: #fff;
+            }
+            &:focus ~ #clearIcon{
+                color: #000;
+            }
+            &:focus + #searchIcon{
+                color: #000;
             }
         }
     }

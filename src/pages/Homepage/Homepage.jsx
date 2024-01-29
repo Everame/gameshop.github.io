@@ -2,30 +2,33 @@ import React, { Component} from 'react'
 import "./homepage.scss"
 import Header from '../../components/header/Header'
 import FetchHttpClient from '../../apiQueries'
-import GameCard from '../../components/gameCard/GameCard';
+import GamesGrid from '../../components/gamesGrid/GamesGrid';
 
 export default class Homepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      isLoading: true,
+      currentPage: 1,
+      currentOrdering: "-rating",
       games: []
     };
   }
 
   getData(){
+    this.setState({
+      isLoading: true
+    });
     const fhc = new FetchHttpClient({'Content-Type': 'application/json'});
-    console.log(process.env)
-    const data = fhc.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&dates=2019-09-01,2019-09-30&platforms=18,1,7`);
+    const data = fhc.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&dates=2023-01-01,2024-01-29&page=${this.state.currentPage}&ordering=${this.state.currentOrdering}`);
     data.then((result) => {
       this.setState({
-        games: result.results
+        isLoading: false,
+        currentPage: this.state.currentPage + 1,
+        games: [...this.state.games, ...result.results]
       });
     })
     
-  }
-
-  componentDidMount = () => {
-    this.getData();
   }
 
 
@@ -35,12 +38,7 @@ export default class Homepage extends Component {
       <>
         <Header/>
         <div className="bodyBlock">
-          <h1 onClick={() => {console.log(this.state.games);}}>Most popular games</h1>
-          <div id="gamesGrid">
-            {games.map((game) => {
-              return <GameCard  title={game.name} image={game.background_image} rate={game.rating_top} relizeDate={game.released} key={game.id} /> 
-            })}
-          </div>
+          <GamesGrid games={games} titleOn={true} isLoading={this.state.isLoading} getData={this.getData.bind(this)} setState={this.setState.bind(this)}/>
         </div>
       </>
     )

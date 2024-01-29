@@ -16,9 +16,9 @@ export default function Header() {
             <h1>G<span className="green">SH</span></h1>
         </Link>
         <div id="searchField">
-            <FontAwesomeIcon icon={faSearch} id='searchIcon' className='icon'/>
             <input type="text" id="search" placeholder='Search' value={searchQuery} onChange={(e) => {setSearchQuery(e.target.value)}}/>
-            <FontAwesomeIcon icon={faTimes} id='clearIcon' onClick={() => {setSearchQuery("")}}/>
+            <FontAwesomeIcon icon={faSearch} id='searchIcon' className='icon'/>
+            <FontAwesomeIcon icon={faTimes} id='clearIcon' style={{display: searchQuery != "" ? "flex" : "none" }} onClick={() => {setSearchQuery("")}}/>
         </div>
         <div id="btnMenu">
             <MenuBtn text="Genres" link="genres"/>
