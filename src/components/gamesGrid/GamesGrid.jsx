@@ -13,10 +13,10 @@ export default function GamesGrid({games, titleOn, isLoading, getData, setState,
     useMemo(() => {
         if(isRate){
             if(rateTogller){
-                games.sort((a, b) => {return b.rating_top - a.rating_top});
+                games.sort((a, b) => {return b.rating - a.rating});
                 setState({currentOrdering: "-rating"})
             }else{
-                games.sort((a, b) => {return a.rating_top - b.rating_top});
+                games.sort((a, b) => {return a.rating - b.rating});
                 setState({currentOrdering: "rating"})
             }
         }else{

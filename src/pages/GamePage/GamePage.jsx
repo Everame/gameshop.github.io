@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 import ScreenSlider from '../../components/screenSlider/ScreenSlider';
+import { Link } from 'react-router-dom';
 
 function withParams(Component) {
     return props => <Component {...props} params={useParams()} />;
@@ -69,7 +70,7 @@ class GamePage extends Component {
                 <div id="doubleBlock">
                     <div id="infoBlock">
                         <div className="infoRow">
-                            <h4>Developers: {game.developers?.map((developer) => {return <span className="listItem pointer" key={developer.slug}>{developer.name}</span>})}</h4>
+                            <h4>Developers: {game.developers?.map((developer) => {return <Link to={`/developers/${developer.slug}`} className="listItem pointer" key={developer.slug}>{developer.name}</Link>})}</h4>
                         </div>
                         <h1 id='gameTitle'>{game.name}</h1>
                         <div id="rateAndReleased">
@@ -84,13 +85,13 @@ class GamePage extends Component {
                             </span>
                         </div>
                         <div className="infoRow">
-                            <h4>Genres: {game.genres?.map((genre) => {return <span className="listItem pointer">{genre.name}</span>})}</h4>
+                            <h4>Genres: {game.genres?.map((genre) => {return <Link to={`/genres/${genre.slug}`} className="listItem pointer" key={genre.slug}>{genre.name}</Link>})}</h4>
                         </div>
                         <div className="infoRow">
-                            <h4 >Platforms: {game.parent_platforms?.map((platform) => {return <span className="listItem">{platform.platform.name}</span>})}</h4>
+                            <h4 >Platforms: {game.parent_platforms?.map((platform) => {return <span className="listItem" key={platform.platform.slug}>{platform.platform.name}</span>})}</h4>
                         </div>
                         <div className="infoRow">
-                            <h4 >Stores: {game.stores ? game.stores.map((store) => {return <span className="listItem">{store.store.name}</span>}) : <span className="listItem">Not available for sale</span>}</h4>
+                            <h4 >Stores: {game.stores ? game.stores.map((store) => {return <span className="listItem" key={store.store.slug}>{store.store.name}</span>}) : <span className="listItem">Not available for sale</span>}</h4>
                         </div>
                         <div id="rateBlock">
                             <div className="rateCont">
@@ -108,14 +109,15 @@ class GamePage extends Component {
                                                 arr[0].classList.remove('hover');
                                                 arr[1].classList.remove('hover');
                                             }}
-                                            style={{width:  `${rate.percent}%` }}></div>
+                                            style={{width:  `${rate.percent}%` }}
+                                            key={rate.slug}></div>
                                         )
                                     })
                                 }
                             </div>
                             <div id="statRow">
                                 {
-                                    game.ratings?.map((rate) => {
+                                    game.ratings?.map((rate, index) => {
                                         return(
                                             <div id={rate.title} className={`statItem`}
                                             onMouseEnter={() => {
@@ -127,7 +129,8 @@ class GamePage extends Component {
                                                 const arr = document.querySelectorAll(`#${rate.title}`)
                                                 arr[0].classList.remove('hover');
                                                 arr[1].classList.remove('hover');
-                                            }}>
+                                            }}
+                                            key={index}>
                                                 <div id={`${rate.title}`} className="colorCircle"></div>
                                                 <div className="statTitle">{rate.title}</div>
                                                 <div className="value">{rate.count}</div>
@@ -148,7 +151,7 @@ class GamePage extends Component {
                     </div>
                     <div id="screenBlock">
                         {screenshots.map((screen, index) => {
-                             return index < 5 ? <img src={screen.image} alt="game screen" onClick={() => {this.setState({sliderShow: true})}} /> : null
+                             return index < 5 ? <img src={screen.image} alt="game screen" onClick={() => {this.setState({sliderShow: true})}} key={screen.id} /> : null
                         })}
                     </div>
                 </div>
