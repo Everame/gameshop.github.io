@@ -1,3 +1,24 @@
+@media all and  (max-width: 1281px) {
+    #listGrid{
+        gap: 10px !important;
+        grid-template-columns: 33% 32% 33% !important;
+    }
+}
+@media all and  (max-width: 1024px) {
+    #listGrid{
+        margin: calc(var(--index) * 0.7) 0 !important;
+    }
+}
+@media all and  (max-width: 480px) {
+    #listGrid{
+        gap: 5px !important;
+    }
+}
+@media all and  (max-width: 320px) {
+    #listGrid{
+        grid-template-columns: 49% 49% !important;
+    }
+}
 #listGrid{
     display: grid;
     box-sizing: border-box;

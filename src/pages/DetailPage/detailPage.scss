@@ -1,6 +1,22 @@
 $devSize: calc(var(--index) * 1.5);
 $marginElement: calc(var(--index) * 0.3);
 $borRadius: calc(var(--index) * 0.4);
+
+@media all and (max-width: 1024px) {
+    #contentBlock{
+        #doubleBlock{
+            #itemInfo{
+                #textBlock{
+                    padding: 0 !important;
+                    #aboutTitle{
+                        margin-bottom: calc(var(--index) * 0.3) !important;
+                    }
+                }
+            }
+        }
+    }
+}
+
 #pageArt{
     position: absolute;
     top: 0;

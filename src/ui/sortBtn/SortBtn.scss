@@ -1,3 +1,15 @@
+@media all and  (max-width: 480px) {
+    .sortBtn{
+        margin: 0 15px 0 0 !important;
+        .btnTitle{
+            font-size: calc(var(--index) * 0.8) !important;
+        }
+        svg{
+            font-size: var(--index);
+        }
+    }
+}
+
 .sortBtn{
     padding: calc(var(--index) * 0.5) var(--index);
     text-decoration: none;
@@ -15,6 +27,8 @@
         font-size: calc(var(--index) * 0.6);
     }
     svg{
+        display: flex;
+        align-items: center;
         color: #fff;
         margin-left: calc(var(--index) * 0.4);
     }

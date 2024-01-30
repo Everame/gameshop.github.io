@@ -1,3 +1,25 @@
+@media all and  (max-width: 1281px) {
+    #gamesGrid{
+        gap: 10px !important;
+        grid-template-columns: 33% 32% 33% !important;
+    }
+}
+@media all and  (max-width: 1024px) {
+    #gamesGrid{
+        margin: calc(var(--index) * 0.7) 0 !important;
+    }
+}
+@media all and  (max-width: 480px) {
+    #gamesGrid{
+        gap: 5px !important;
+    }
+}
+@media all and  (max-width: 320px) {
+    #gamesGrid{
+        grid-template-columns: 49% 49% !important;
+    }
+}
+
 #gamesGrid{
     display: grid;
     box-sizing: border-box;

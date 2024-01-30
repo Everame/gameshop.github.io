@@ -1,5 +1,47 @@
 $btnSize: calc(var(--index) * 2);
 $margin: calc(var(--index) * 0.5);
+
+@media all and (max-width: 1024px) {
+    #outerCont{
+        #btnsRow{
+            height: 6% !important;
+        }
+        #contentBlock{
+            height: 75% !important;
+            #mainScreen{
+                height: 50% !important;
+            }
+        }
+        #thumbRow{
+            height: 6% !important;
+        }
+    }
+}
+@media all and (max-width: 375px) {
+    #outerCont{
+        #contentBlock{
+            #mainScreen{
+                height: 40% !important;
+            }
+        }
+        #thumbRow{
+            flex-wrap: wrap;
+            .thumbCont{
+                margin-bottom: calc(var(--index) * 0.3);
+            }  
+        }
+    }
+}
+@media all and (max-width: 320px) {
+    #outerCont{
+        #contentBlock{
+            #mainScreen{
+                height: 30% !important;
+            }
+        }
+    }
+}
+
 #outerCont{
     position: fixed;
     height: 100%;

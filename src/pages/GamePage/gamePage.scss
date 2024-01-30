@@ -1,6 +1,50 @@
 $devSize: calc(var(--index) * 1.5);
 $marginElement: calc(var(--index) * 0.3);
 $borRadius: calc(var(--index) * 0.4);
+
+@media all and (max-width: 1024px) {
+    #contentBlock{
+        #doubleBlock{
+            padding: var(--index) var(--index) calc(var(--index) * 0.5) var(--index) !important;
+            #infoBlock{
+                h1#gameTitle{
+                    font-size: calc(var(--index) * 1.6) !important;
+                }
+                #rateAndReleased{
+                    width: 70% !important;
+                }
+                #statRow{
+                    margin-top: $marginElement !important;
+                }
+            }
+        }
+        #textBlock{
+            padding: var(--index) var(--index) calc(var(--index) * 0.5) var(--index) !important;
+            #aboutTitle{
+                margin-bottom: calc(var(--index) * 1) !important;
+            }
+            p{
+                font-size: calc(var(--index) * 0.8) !important;
+            }
+        }
+        
+    }
+}
+@media all and (max-width: 375px) {
+    #contentBlock{
+        #doubleBlock{
+            #infoBlock{
+                h1#gameTitle{
+                    font-size: calc(var(--index) * 1.3) !important;
+                }
+                #rateAndReleased{
+                    width: 90% !important;
+                }
+            }
+        }   
+    }
+}
+
 #pageArt{
     position: absolute;
     top: 0;

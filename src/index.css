@@ -1,3 +1,8 @@
+@media all and (max-width: 1024px) {
+  h4{
+    font-size: calc(var(--index) * 0.9) !important;
+  }
+}
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
