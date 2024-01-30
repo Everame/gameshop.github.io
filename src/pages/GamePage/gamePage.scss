@@ -1,0 +1,237 @@
+$devSize: calc(var(--index) * 1.5);
+$marginElement: calc(var(--index) * 0.3);
+$borRadius: calc(var(--index) * 0.4);
+#pageArt{
+    position: absolute;
+    top: 0;
+    height: calc(var(--index) * 23);
+    width: 100%;
+    content: '';
+    z-index: 1;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+#loaderOut{
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+#contentBlock{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+    #doubleBlock{
+        width: 100%;
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        padding: calc(var(--index) * 5) calc(var(--index) * 5) calc(var(--index) * 2) calc(var(--index) * 5);
+        box-sizing: border-box;
+        #infoBlock{
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            #gameTitle{
+                font-size: calc(var(--index) * 1.8) !important;
+                color: #fff;
+            }
+            #rateAndReleased{
+                display: flex;
+                width: 45%;
+                align-items: center;
+                justify-content: space-between;
+                margin-top: $marginElement;
+                #rate{
+                    color: #fff;
+                }
+                #relizeDate{
+                    color: var(--grey-txt-color);
+                }
+            }
+            .infoRow{
+                margin-top: $marginElement;
+                display: flex;
+                align-items: center;
+                justify-content: flex-start;
+                position: relative;
+                h4, h5{
+                    .listItem{
+                        margin-right: $marginElement;
+                        color: var(--grey-txt-color);
+                        &::after{
+                            content: ',';
+                        }
+                        &:last-child::after{
+                            content: '';
+                        }
+                        &.pointer{
+                            text-decoration: underline;
+                            cursor: pointer;
+                            &:hover{
+                                color: #fff;
+                            }
+                        }
+                        &.link{
+                            text-decoration: none;
+                            &:hover{
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+            }
+            #rateBlock{
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                justify-content: space-between;
+                width: 100%;
+                margin-top: calc($marginElement * 3);
+                .rateCont{
+                    height: calc(var(--index) * 1.8);
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    justify-content: flex-start;
+                    div{
+                        height: 100%;
+                        &:first-child{
+                            border-radius: $borRadius 0 0 $borRadius;
+                        }
+                        &:last-child{
+                            border-radius: 0 $borRadius $borRadius 0;
+                        }
+                    }
+                    #exceptional{
+                        background-color: var(--green);
+                    }
+                    #recommended{
+                        background-color: var(--blue);
+                    }
+                    #meh{
+                        background-color: var(--orange);
+                    }
+                    #skip{
+                        background-color: var(--red);
+                    }
+                }
+
+                #statRow{
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: calc($marginElement * 2);
+                    .statItem{
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        padding: $marginElement;
+                        overflow: hidden;
+                        border-radius: $borRadius;
+                        margin-left: $marginElement;
+                        .colorCircle{
+                            content: "";
+                            width: $borRadius;
+                            height: $borRadius;
+                            border-radius: 100%;
+                            &#exceptional{
+                                background-color: var(--green);
+                            }
+                            &#recommended{
+                                background-color: var(--blue);
+                            }
+                            &#meh{
+                                background-color: var(--orange);
+                            }
+                            &#skip{
+                                background-color: var(--red);
+                            }
+                        }
+                        .statTitle{
+                            color: #fff;
+                            font-size: calc(var(--index) * 0.8);
+                            font-weight: 600;
+                            text-transform: capitalize;
+                            position: relative;
+                            margin-left: $marginElement;
+                        }
+                        .value{
+                            color: var(--grey-txt-color);
+                            font-size: calc(var(--index) * 0.8);
+                            font-weight: 600;
+                            margin-left: $marginElement;
+                        }
+                    }
+                }
+            }
+        }
+        #screenBlock{
+            width: 50%;
+            display: grid;
+            box-sizing: border-box;
+            padding: calc(var(--index) * 0.5);
+            grid-template-areas:
+                "A A A A   A A A A   A A A A"
+                "B B B B   B B C C   C C C C"
+                "D D D D   D D E E   E E E E";
+            gap: calc(var(--index) * 0.5);
+            img{
+                width: 70%;
+                align-self: center;
+                cursor: pointer;
+                &:first-child{
+                    grid-area: A;
+                    justify-self: center !important;
+                }
+                &:nth-child(2n){
+                    justify-self: flex-end;
+                }
+                &:nth-child(2n + 1){
+                    justify-self: flex-start;
+                }          
+                &:nth-child(2){
+                    grid-area: B;
+                }
+                &:nth-child(3){
+                    grid-area: C;
+                }
+                &:nth-child(4){
+                    grid-area: D;
+                }
+                &:nth-child(5){
+                    grid-area: E;
+                }
+            }
+        }
+    }
+    #textBlock{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        padding: 0 calc(var(--index) * 5) calc(var(--index) * 5) calc(var(--index) * 5);
+        #aboutTitle{
+            margin-bottom: calc(var(--index) * 1.5);
+        }
+        p{
+            color: #fff;
+            text-align: justify;
+            font-size: calc(var(--index) * 1.2);
+        }
+    }
+    
+}

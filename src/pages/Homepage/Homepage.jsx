@@ -11,6 +11,8 @@ export default class Homepage extends Component {
       isLoading: true,
       currentPage: 1,
       currentOrdering: "-rating",
+      count: 0,
+      end: false,
       games: []
     };
   }
@@ -20,14 +22,34 @@ export default class Homepage extends Component {
       isLoading: true
     });
     const fhc = new FetchHttpClient({'Content-Type': 'application/json'});
-    const data = fhc.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&dates=2023-01-01,2024-01-29&page=${this.state.currentPage}&ordering=${this.state.currentOrdering}`);
-    data.then((result) => {
-      this.setState({
-        isLoading: false,
-        currentPage: this.state.currentPage + 1,
-        games: [...this.state.games, ...result.results]
-      });
-    })
+    let data;
+    if(this.state.count === 0){
+      data = fhc.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&dates=2023-01-01,2024-01-29&page=${this.state.currentPage}&ordering=${this.state.currentOrdering}`);
+      data.then((result) => {
+        return this.setState({
+          isLoading: false,
+          currentPage: this.state.currentPage + 1,
+          count: result.count,
+          games: [...this.state.games, ...result.results]
+        });
+      })
+    }else{
+      if(this.state.currentPage <= this.state.count/20){
+        data = fhc.get(`https://api.rawg.io/api/games?key=${process.env.REACT_APP_API_KEY}&dates=2023-01-01,2024-01-29&page=${this.state.currentPage}&ordering=${this.state.currentOrdering}`);
+        data.then((result) => {
+          return this.setState({
+            isLoading: false,
+            currentPage: this.state.currentPage + 1,
+            games: [...this.state.games, ...result.results]
+          });
+        })
+      }else{
+        return this.setState({
+          isLoading: false,
+          end: true
+        });
+      }
+    }
     
   }
 
@@ -38,7 +60,7 @@ export default class Homepage extends Component {
       <>
         <Header/>
         <div className="bodyBlock">
-          <GamesGrid games={games} titleOn={true} isLoading={this.state.isLoading} getData={this.getData.bind(this)} setState={this.setState.bind(this)}/>
+          <GamesGrid games={games} titleOn={true} isLoading={this.state.isLoading} getData={this.getData.bind(this)} setState={this.setState.bind(this)} end={this.state.end}/>
         </div>
       </>
     )

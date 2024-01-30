@@ -4,7 +4,7 @@ import GameCard from './../gameCard/GameCard';
 import SortBtn from '../../ui/sortBtn/SortBtn';
 import Loader from '../../ui/loader/Loader';
 
-export default function GamesGrid({games, titleOn, isLoading, getData, setState}) {
+export default function GamesGrid({games, titleOn, isLoading, getData, setState, end}) {
     const [isRate, setIsRate] = useState(true);
     const [rateTogller, setRateToggler] = useState(true);
     const [dateTogller, setDateToggler] = useState(false);
@@ -44,7 +44,7 @@ export default function GamesGrid({games, titleOn, isLoading, getData, setState}
   return (
     <>
         {
-        titleOn && isRate ? 
+        !titleOn ? null : isRate ? 
             <h1>Games by popularity</h1> : <h1>Freshness games</h1>
         }
         <div id="sortRow">
@@ -57,11 +57,12 @@ export default function GamesGrid({games, titleOn, isLoading, getData, setState}
         </div>
         <div id="gamesGrid">
             {games.map((game) => {
-                return <GameCard  title={game.name} image={game.background_image} rating={game.rating} relizeDate={game.released} key={game.slug} /> 
+                return <GameCard  title={game.name} image={game.background_image} rating={game.rating} relizeDate={game.released} slug={game.slug} /> 
             })}
         </div>
         <div id="loaderCont" ref={ref}>
             {isLoading ? <Loader/> : null}
+            {end ? <h4>End of page</h4> : null}
         </div>
     </>
   )

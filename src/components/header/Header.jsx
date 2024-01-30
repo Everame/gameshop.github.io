@@ -21,8 +21,8 @@ export default function Header() {
             <FontAwesomeIcon icon={faTimes} id='clearIcon' style={{display: searchQuery != "" ? "flex" : "none" }} onClick={() => {setSearchQuery("")}}/>
         </div>
         <div id="btnMenu">
-            <MenuBtn text="Genres" link="genres"/>
-            <MenuBtn text="Developers" link="developers"/>
+            <MenuBtn text="Genres" link="/genres"/>
+            <MenuBtn text="Developers" link="/developers"/>
         </div>
     </header>
   )

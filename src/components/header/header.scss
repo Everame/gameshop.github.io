@@ -5,6 +5,8 @@ header{
     padding: calc(var(--index) * 0.5) var(--index);
     align-items: center;
     justify-content: space-between;
+    z-index: 3;
+    position: relative;
     #logo{
         display: flex;
         align-items: center;

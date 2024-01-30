@@ -1,0 +1,45 @@
+.listItem{
+    height: calc(var(--index) * 12);
+    width: claim(20%, 25%, 23%);
+    border-radius: calc(var(--index) * 2);
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.4s ease;
+    &:hover{
+        transform: scale(1.01);
+        #infoBlock{
+            opacity: 0;
+            height: 0;
+            min-height: 0;
+            .statRow{
+                opacity: 0;
+            }
+            h4{
+                opacity: 0;
+            }
+        }
+    }
+    #infoBlock{
+        min-height: 35%;
+        width: 100%;
+        box-sizing: border-box;
+        background-color: var(--sub-color);
+        position: absolute;
+        bottom: 0;
+        padding: calc(var(--index) * 0.7) calc(var(--index) * 0.7);
+        border-radius: 0 0 calc(var(--index) * 1.8) calc(var(--index) * 1.8);
+        transition: all 0.3s ease;
+        #statRow{
+            display: flex;
+            width: 100%;
+            align-items: center;
+            justify-content: space-between;
+            span{
+                color: var(--grey-txt-color);
+            }
+        }
+    }
+}

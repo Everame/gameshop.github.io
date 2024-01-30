@@ -21,17 +21,38 @@ h4{
   color: #fff;
 }
 
+h5{
+  font-size: calc(var(--index) * 0.9);
+  color: #fff;
+}
+
+.hover{
+  box-shadow: 0 0 5px #fff;
+}
+
+.white{
+  color: #fff;
+}
+
 :root{
   --index: calc(1vh + 1vw);
   --bg-color: #151515;
   --focus-color: #444444;
   --sub-color: #262626;
   --green: #1BA344;
+  --blue: #4A63C8;
+  --orange: #F9B44A;
+  --red: #F62F3E;
   --grey-txt-color: #ADADAD;
 }
 
 @keyframes rotate {
   100%   {transform: rotate(360deg)}
+}
+
+@keyframes fadeOut {
+  0%  {opacity: 0;transform: translateX(150%)}
+  100% {transform: translateX(0%); opacity: 1; }
 }
 
 @keyframes prixClipFix {

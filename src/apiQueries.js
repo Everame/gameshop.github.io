@@ -12,7 +12,7 @@ export default class FetchHttpClient {
                     return response.json();
                 }
 
-                return response.then(error => {
+                return response.json().then(error => {
                     const e = new Error('Что-то пошло не так')
                     e.data = error
                     throw e
@@ -32,7 +32,7 @@ export default class FetchHttpClient {
                     const e = new Error('Что-то пошло не так')
                     e.data = error
                     throw e
-                })
+                })     
             })
     }
 }
