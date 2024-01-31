@@ -56,6 +56,17 @@ class GamePage extends Component {
         this.getData();
     }
 
+    componentDidUpdate(prevProps, prevState){
+        if(this.props.params.slug !== this.state.slug){
+            this.setState({
+                slug: this.props.params.slug
+            });
+        }
+        if(prevState.slug !== this.state.slug){
+            this.getData();
+        }
+    }
+
   render() {
     const {game, isLoading, screenshots, sliderShow} = this.state;
     return (
@@ -110,7 +121,7 @@ class GamePage extends Component {
                                                 arr[1].classList.remove('hover');
                                             }}
                                             style={{width:  `${rate.percent}%` }}
-                                            key={rate.slug}></div>
+                                            key={rate.id}></div>
                                         )
                                     })
                                 }

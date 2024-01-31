@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef } from 'react'
 import LisItem from '../../ui/listItem/ListItem';
 import Loader from '../../ui/loader/Loader';
 import "./listGrid.scss";
@@ -19,7 +19,7 @@ export default function ListGrid({list, type, getData, isLoading, end}) {
     <>
         {
         type === 'genres' ? 
-            <h1>Genres</h1> : <h1>Developers</h1>
+            <h1 >Genres</h1> : <h1>Developers</h1>
         }
         <div id="listGrid">
             {list?.map((item) => {

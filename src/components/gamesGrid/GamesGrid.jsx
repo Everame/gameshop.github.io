@@ -3,11 +3,14 @@ import "./gamesGrid.scss"
 import GameCard from './../gameCard/GameCard';
 import SortBtn from '../../ui/sortBtn/SortBtn';
 import Loader from '../../ui/loader/Loader';
+import FilterBtn from '../../ui/filterBtn/FilterBtn';
 
-export default function GamesGrid({games, titleOn, isLoading, getData, setState, end}) {
+export default function GamesGrid({games, titleOn, filterOn, isLoading, getData, setState, end}) {
     const [isRate, setIsRate] = useState(true);
     const [rateTogller, setRateToggler] = useState(true);
     const [dateTogller, setDateToggler] = useState(false);
+    const [filterTogller, setFilterToggler] = useState(false);
+    const [currentFilter, setCurrentFilter] = useState("Choose platform");
 
 
     useMemo(() => {
@@ -28,7 +31,11 @@ export default function GamesGrid({games, titleOn, isLoading, getData, setState,
                 setState({currentOrdering: "released"})
             }
         }
-    }, [isRate, rateTogller, dateTogller])
+        if(currentFilter !== "Choose platform"){
+            setState({currentFilter: currentFilter, games: [], currentPage: 1, count: 0})
+            getData()
+        }
+    }, [isRate, rateTogller, dateTogller, currentFilter])
 
     const ref = useRef(null);
 
@@ -54,6 +61,13 @@ export default function GamesGrid({games, titleOn, isLoading, getData, setState,
             <SortBtn title={"Release date"} toggler={dateTogller} 
             onClick={() => {setIsRate(false); setDateToggler(!dateTogller)}} 
             style={{backgroundColor: isRate ? "var(--sub-color)" : "var(--focus-color)"}} />
+            {filterOn ? 
+                <FilterBtn currentFilter={currentFilter} toggler={filterTogller} setCurrentFilter={setCurrentFilter}
+                onClick={() => {setFilterToggler(!filterTogller)}} 
+                style={{backgroundColor: isRate ? "var(--sub-color)" : "var(--focus-color)"}} />
+                : null
+            }
+            
         </div>
         <div id="gamesGrid">
             {games.map((game) => {

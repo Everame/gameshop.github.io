@@ -115,7 +115,7 @@ class DetailPage extends Component {
                 </div>
                 <div id="gamesBlock">
                   <h1>Suitable games</h1>
-                  <GamesGrid games={this.state.games} titleOn={false} isLoading={this.state.gameLoading} getData={this.getSuitGame.bind(this)} setState={this.setState.bind(this)} end={this.state.end}/>
+                  <GamesGrid games={this.state.games} titleOn={false} filterOn={false} isLoading={this.state.gameLoading} getData={this.getSuitGame.bind(this)} setState={this.setState.bind(this)} end={this.state.end}/>
                 </div>
             </div>
         </>

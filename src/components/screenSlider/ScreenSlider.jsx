@@ -43,7 +43,7 @@ export default function ScreenSlider({screenshots, close}) {
             
             {screenshots?.map((screen, index) => {
                 return (
-                    <div className={`thumbCont ${currentScreen === index ? "active" : ""}`} onClick={(e) => {setCurrentScreen(index)}}>
+                    <div className={`thumbCont ${currentScreen === index ? "active" : ""}`} key={index} onClick={(e) => {setCurrentScreen(index)}}>
                         <img className='thumb' src={screen.image} alt="thumb screenshot" />
                     </div>
                 )

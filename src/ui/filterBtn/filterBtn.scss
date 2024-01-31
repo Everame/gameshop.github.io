@@ -1,0 +1,64 @@
+@media all and  (max-width: 480px) {
+    .filterBtn{
+        margin: 0 15px 0 0 !important;
+        .btnTitle{
+            font-size: calc(var(--index) * 0.8) !important;
+        }
+        svg{
+            font-size: var(--index);
+        }
+    }
+}
+
+.filterBtn{
+    padding: calc(var(--index) * 0.5) var(--index);
+    text-decoration: none;
+    transition: all 0.4s ease;
+    box-shadow: none;
+    border: none;
+    margin: 0 30px 0 0;
+    cursor: pointer;
+    border-radius: calc(var(--index) * 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    .btnTitle{
+        color: #fff;
+        font-size: calc(var(--index) * 0.6);
+    }
+    svg{
+        display: flex;
+        align-items: center;
+        color: #fff;
+        margin-left: calc(var(--index) * 0.4);
+    }
+    #listContent{
+        background-color: #000;
+        position: absolute;
+        width: 100%;
+        top: 110%;
+        left: 0;
+        box-sizing: border-box;
+        padding: calc(var(--index) * 0.3);
+        border-radius: calc(var(--index) * 0.5);
+        display: none;
+        z-index: 20;
+        color: #fff;
+        &.show{
+            display: block;
+        }
+        .platformItem{
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            text-decoration: none;
+            border-radius: calc(var(--index) * 0.1);
+            box-sizing: border-box;
+            padding: calc(var(--index) * 0.2) calc(var(--index) * 0.5);
+            &:hover{
+                background-color: var(--focus-color);
+            }
+        }
+    }
+}
