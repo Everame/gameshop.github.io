@@ -5,10 +5,13 @@ import MenuBtn from '../../ui/MenuBtn/MenuBtn'
 import { Link } from 'react-router-dom'
 import { faSearch, faTimes } from '@fortawesome/free-solid-svg-icons'
 import FetchHttpClient from '../../apiQueries'
+import { useTranslation } from 'react-i18next'
+import { EN, RU } from '../../assets/assets'
 
 export default function Header({linkActive}) {
     const [searchQuery, setSearchQuery] = useState("");
     const [games, setGames] = useState([]);
+    const {t, i18n} = useTranslation();
 
     function search(){
         const fhc = new FetchHttpClient({'Content-Type': 'application/json'});
@@ -35,7 +38,7 @@ export default function Header({linkActive}) {
             <h1>G<span className="green">SH</span></h1>
         </Link>
         <div id="searchField">
-            <input type="text" id="search" placeholder='Search' value={searchQuery} onChange={(e) => {setSearchQuery(e.target.value)}}/>
+            <input type="text" id="search" placeholder={t("search")} value={searchQuery} onChange={(e) => {setSearchQuery(e.target.value)}}/>
             <FontAwesomeIcon icon={faSearch} id='searchIcon' className='icon'/>
             <FontAwesomeIcon icon={faTimes} id='clearIcon' style={{display: searchQuery != "" ? "flex" : "none" }} onClick={() => {setSearchQuery("")}}/>
             <div id="responseBlock" className={searchQuery !== "" ? "show" : ""}>
@@ -50,14 +53,15 @@ export default function Header({linkActive}) {
                 {
                     games.length === 0 && searchQuery !== "" ?
                     <article className="responseItem" key={"nothing"}>
-                        <h5>Nothing was found</h5>
+                        <h5>{t('nothing')}</h5>
                     </article> : null
                 }
             </div>
         </div>
         <div id="btnMenu">
-            <MenuBtn text="Genres" active={linkActive === 'genres' ? true : false} link="/genres"/>
-            <MenuBtn text="Developers" active={linkActive === 'developers' ? true : false} link="/developers"/>
+            <button id='langSwitch' onClick={() => {i18n.changeLanguage(i18n.language === 'en' ? 'ru' : 'en')}}>{i18n.language === 'en' ? <EN/>: <RU/>}</button>
+            <MenuBtn text={t('genres')} active={linkActive === 'genres' ? true : false} link="/genres"/>
+            <MenuBtn text={t('developers')} active={linkActive === 'developers' ? true : false} link="/developers"/>
         </div>
     </header>
   )

@@ -4,15 +4,26 @@ import GameCard from './../gameCard/GameCard';
 import SortBtn from '../../ui/sortBtn/SortBtn';
 import Loader from '../../ui/loader/Loader';
 import FilterBtn from '../../ui/filterBtn/FilterBtn';
+import { useTranslation } from 'react-i18next';
 
 export default function GamesGrid({games, titleOn, filterOn, isLoading, getData, setState, end}) {
+    const {t} = useTranslation();
+    const choseText = t('choose');
+    const relevanceText = t('relevance');
+    const dateText = t('date');
     const [isRate, setIsRate] = useState(true);
     const [rateTogller, setRateToggler] = useState(true);
     const [dateTogller, setDateToggler] = useState(false);
     const [filterTogller, setFilterToggler] = useState(false);
-    const [currentFilter, setCurrentFilter] = useState("Choose platform");
+    const [currentFilter, setCurrentFilter] = useState(t('choose'));
+    
+    useMemo(() => {
+        if(currentFilter === "Choose platform" || currentFilter === "Выберите платформу"){
+            setCurrentFilter(choseText);
+        }
+    }, [choseText])
 
-
+    
     useMemo(() => {
         if(isRate){
             if(rateTogller){
@@ -31,7 +42,7 @@ export default function GamesGrid({games, titleOn, filterOn, isLoading, getData,
                 setState({currentOrdering: "released"})
             }
         }
-        if(currentFilter !== "Choose platform"){
+        if(currentFilter !== "Choose platform" && currentFilter !== "Выберите платформу"){
             setState({currentFilter: currentFilter, games: [], currentPage: 1, count: 0})
             getData()
         }
@@ -52,19 +63,19 @@ export default function GamesGrid({games, titleOn, filterOn, isLoading, getData,
     <>
         {
         !titleOn ? null : isRate ? 
-            <h1>Games by popularity</h1> : <h1>Freshness games</h1>
+            <h1>{t("popular")}</h1> : <h1>{t("fresh")}</h1>
         }
         <div id="sortRow">
-            <SortBtn title={"Relevance"} toggler={rateTogller} 
+            <SortBtn title={relevanceText} toggler={rateTogller} 
             onClick={() => {setIsRate(true); setRateToggler(!rateTogller)}} 
             style={{backgroundColor: isRate ? "var(--focus-color)" : "var(--sub-color)"}} />
-            <SortBtn title={"Release date"} toggler={dateTogller} 
+            <SortBtn title={dateText} toggler={dateTogller} 
             onClick={() => {setIsRate(false); setDateToggler(!dateTogller)}} 
             style={{backgroundColor: isRate ? "var(--sub-color)" : "var(--focus-color)"}} />
             {filterOn ? 
                 <FilterBtn currentFilter={currentFilter} toggler={filterTogller} setCurrentFilter={setCurrentFilter}
                 onClick={() => {setFilterToggler(!filterTogller)}} 
-                style={{backgroundColor: isRate ? "var(--sub-color)" : "var(--focus-color)"}} />
+                style={{backgroundColor: currentFilter !== "Choose platform" && currentFilter !== "Выберите платформу" ? "var(--focus-color)" : "var(--sub-color)"}} />
                 : null
             }
             
@@ -76,7 +87,7 @@ export default function GamesGrid({games, titleOn, filterOn, isLoading, getData,
         </div>
         <div id="loaderCont" ref={ref}>
             {isLoading ? <Loader/> : null}
-            {end ? <h4>End of page</h4> : null}
+            {end ? <h4>{t('end')}</h4> : null}
         </div>
     </>
   )

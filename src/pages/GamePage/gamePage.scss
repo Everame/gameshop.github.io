@@ -212,12 +212,18 @@ $borRadius: calc(var(--index) * 0.4);
                             text-transform: capitalize;
                             position: relative;
                             margin-left: $marginElement;
+                            &.small{
+                                font-size: calc(var(--index) * 0.7);
+                            }
                         }
                         .value{
                             color: var(--grey-txt-color);
                             font-size: calc(var(--index) * 0.8);
                             font-weight: 600;
                             margin-left: $marginElement;
+                            &.small{
+                                font-size: calc(var(--index) * 0.7);
+                            }
                         }
                     }
                 }

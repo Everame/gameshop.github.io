@@ -79,7 +79,7 @@ header{
         display: flex;
         align-items: center;
         justify-content: flex-start;
-        width: 70%;
+        width: 60%;
         #searchIcon{
             position: absolute;
             color: var(--grey-txt-color);
@@ -155,6 +155,21 @@ header{
         display: flex;
         align-items: center;
         justify-content: space-between;
-        width: calc(var(--index) * 12);
+        width: calc(var(--index) * 15);
+        #langSwitch{
+            padding: calc(var(--index) * 0.5);
+            border: 3px solid var(--focus-color);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            background-color: transparent;
+            cursor: pointer;
+            &:hover{
+                background-color: var(--focus-color);
+            }
+            svg{
+                width: calc(var(--index) * 0.9);
+                height: calc(var(--index) * 0.9);
+            }
+        }
     }
 }

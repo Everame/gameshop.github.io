@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import { useParams } from 'react-router';
 import FetchHttpClient from '../../apiQueries';
 import Loader from '../../ui/loader/Loader';
@@ -9,9 +9,10 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as regularStar } from '@fortawesome/free-regular-svg-icons';
 import ScreenSlider from '../../components/screenSlider/ScreenSlider';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function withParams(Component) {
-    return props => <Component {...props} params={useParams()} />;
+    return props => <Component {...props} params={useParams()} t={useTranslation()} />;
 }
 
 class GamePage extends Component {
@@ -69,19 +70,22 @@ class GamePage extends Component {
 
   render() {
     const {game, isLoading, screenshots, sliderShow} = this.state;
+    const {t, i18n} = this.props.t;
     return (
         isLoading ? 
-        <div id="loaderOut">
-            <Loader/>
-        </div>:
-        <>
+        <Suspense fallback={<Loader/>}>
+            <div id="loaderOut">
+                <Loader/>
+            </div>
+        </Suspense>:
+        <Suspense fallback={<Loader/>}>
             <Header/>
             <div id="pageArt" style={{backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${game.background_image_additional})`}}></div>
             <div id="contentBlock">
                 <div id="doubleBlock">
                     <div id="infoBlock">
                         <div className="infoRow">
-                            <h4>Developers: {game.developers?.map((developer) => {return <Link to={`/developers/${developer.slug}`} className="listItem pointer" key={developer.slug}>{developer.name}</Link>})}</h4>
+                            <h4>{t("developers")}: {game.developers?.map((developer) => {return <Link to={`/developers/${developer.slug}`} className="listItem pointer" key={developer.slug}>{developer.name}</Link>})}</h4>
                         </div>
                         <h1 id='gameTitle'>{game.name}</h1>
                         <div id="rateAndReleased">
@@ -91,18 +95,18 @@ class GamePage extends Component {
                                 })} 
                             </span>
                             <span id="relizeDate">
-                                <span className="white" style={{marginRight: "calc(var(--index) * 0.3)"}}>Released:</span> 
+                                <span className="white" style={{marginRight: "calc(var(--index) * 0.3)"}}>{t('releaseTitle')}</span> 
                                 {game.released}
                             </span>
                         </div>
                         <div className="infoRow">
-                            <h4>Genres: {game.genres?.map((genre) => {return <Link to={`/genres/${genre.slug}`} className="listItem pointer" key={genre.slug}>{genre.name}</Link>})}</h4>
+                            <h4>{t('genres')}: {game.genres?.map((genre) => {return <Link to={`/genres/${genre.slug}`} className="listItem pointer" key={genre.slug}>{genre.name}</Link>})}</h4>
                         </div>
                         <div className="infoRow">
-                            <h4 >Platforms: {game.parent_platforms?.map((platform) => {return <span className="listItem" key={platform.platform.slug}>{platform.platform.name}</span>})}</h4>
+                            <h4 >{t('platforms')}: {game.parent_platforms?.map((platform) => {return <span className="listItem" key={platform.platform.slug}>{platform.platform.name}</span>})}</h4>
                         </div>
                         <div className="infoRow">
-                            <h4 >Stores: {game.stores ? game.stores.map((store) => {return <span className="listItem" key={store.store.slug}>{store.store.name}</span>}) : <span className="listItem">Not available for sale</span>}</h4>
+                            <h4 >{t('stores')}: {game.stores ? game.stores.map((store) => {return <span className="listItem" key={store.store.slug}>{store.store.name}</span>}) : <span className="listItem">Not available for sale</span>}</h4>
                         </div>
                         <div id="rateBlock">
                             <div className="rateCont">
@@ -143,8 +147,8 @@ class GamePage extends Component {
                                             }}
                                             key={index}>
                                                 <div id={`${rate.title}`} className="colorCircle"></div>
-                                                <div className="statTitle">{rate.title}</div>
-                                                <div className="value">{rate.count}</div>
+                                                <div className={`statTitle ${i18n.language === 'ru' ? "small" : ""}`}>{t(`${rate.title}`)}</div>
+                                                <div className={`value ${i18n.language === 'ru' ? "small" : ""}`}>{rate.count}</div>
                                             </div>
                                         )
                                     })
@@ -154,7 +158,7 @@ class GamePage extends Component {
                         </div>
                         {game.website !== "" ?
                             <div className="infoRow">
-                                <h5 >Website: <a href={game.website} className="listItem link">{game.website}</a></h5>
+                                <h5 >{t('website')}: <a href={game.website} className="listItem link">{game.website}</a></h5>
                             </div> :
                             null
                         }
@@ -167,12 +171,12 @@ class GamePage extends Component {
                     </div>
                 </div>
                 <div id="textBlock">
-                    <h4 id='aboutTitle'>About Game</h4>
+                    <h4 id='aboutTitle'>{t("about")}{t("game")}</h4>
                     <p>{game.description_raw}</p>
                 </div>
             </div>
             {sliderShow ? <ScreenSlider screenshots={screenshots} close={this.sliderClose.bind(this)}/> : null}
-        </>
+        </Suspense>
     )
   }
 }

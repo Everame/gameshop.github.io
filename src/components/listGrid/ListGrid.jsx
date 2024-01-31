@@ -2,9 +2,11 @@ import React, { useEffect, useRef } from 'react'
 import LisItem from '../../ui/listItem/ListItem';
 import Loader from '../../ui/loader/Loader';
 import "./listGrid.scss";
+import { useTranslation } from 'react-i18next';
 
 export default function ListGrid({list, type, getData, isLoading, end}) {
     const ref = useRef(null);
+    const {t} = useTranslation();
 
     useEffect(() => {
         const observer = new IntersectionObserver(([entry]) => {
@@ -19,7 +21,7 @@ export default function ListGrid({list, type, getData, isLoading, end}) {
     <>
         {
         type === 'genres' ? 
-            <h1 >Genres</h1> : <h1>Developers</h1>
+            <h1 >{t('genres')}</h1> : <h1>{t("developers")}</h1>
         }
         <div id="listGrid">
             {list?.map((item) => {
@@ -28,7 +30,7 @@ export default function ListGrid({list, type, getData, isLoading, end}) {
         </div>
         <div id="loaderCont" ref={ref}>
             {isLoading ? <Loader/> : null}
-            {end ? <h4>End of page</h4> : null}
+            {end ? <h4>{t('end')}</h4> : null}
         </div>
     </>
   )

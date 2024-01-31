@@ -1,8 +1,9 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import Header from './../../components/header/Header';
 import ListGrid from '../../components/listGrid/ListGrid';
 import "./listPage.scss";
 import FetchHttpClient from '../../apiQueries';
+import Loader from '../../ui/loader/Loader';
 
 export default class ListPage extends Component {
     constructor(props) {
@@ -60,12 +61,12 @@ export default class ListPage extends Component {
 
   render() {
     return (
-      <>
+      <Suspense fallback={<Loader/>}>
         <Header linkActive={this.props.type}/>
         <div className="bodyBlock">
           <ListGrid list={this.state.list} type={this.props.type} isLoading={this.state.isLoading} getData={this.getData.bind(this)} end={this.state.end}/>
         </div>
-      </>
+      </Suspense>
     )
   }
 }

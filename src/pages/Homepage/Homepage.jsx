@@ -1,8 +1,9 @@
-import React, { Component} from 'react'
+import React, { Component, Suspense} from 'react'
 import "./homepage.scss"
 import Header from '../../components/header/Header'
 import FetchHttpClient from '../../apiQueries'
 import GamesGrid from '../../components/gamesGrid/GamesGrid';
+import Loader from '../../ui/loader/Loader';
 
 export default class Homepage extends Component {
   constructor(props) {
@@ -67,12 +68,12 @@ export default class Homepage extends Component {
   render() {
     const {games} = this.state;
     return (
-      <>
+      <Suspense fallback={<Loader/>}>
         <Header/>
         <div className="bodyBlock">
           <GamesGrid games={games} titleOn={true} filterOn={true} isLoading={this.state.isLoading} getData={this.getData.bind(this)} setState={this.setState.bind(this)} end={this.state.end}/>
         </div>
-      </>
+      </Suspense>
     )
   }
 }

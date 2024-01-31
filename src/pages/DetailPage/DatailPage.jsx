@@ -1,13 +1,14 @@
-import React, { Component } from 'react'
+import React, { Component, Suspense } from 'react'
 import { useParams } from 'react-router';
 import FetchHttpClient from '../../apiQueries';
 import Loader from '../../ui/loader/Loader';
 import Header from '../../components/header/Header';
 import "./detailPage.scss"
 import GamesGrid from '../../components/gamesGrid/GamesGrid';
+import { useTranslation } from 'react-i18next';
 
 function withParams(Component) {
-    return props => <Component {...props} params={useParams()} />;
+    return props => <Component {...props} params={useParams()} t={useTranslation()}/>;
 }
 
 class DetailPage extends Component {
@@ -81,12 +82,15 @@ class DetailPage extends Component {
 
   render() {
     const {item, isLoading} = this.state;
+    const {t} = this.props.t;
     return (
         isLoading ? 
-        <div id="loaderOut">
-            <Loader/>
-        </div>:
-        <>
+        <Suspense fallback={<Loader/>}>
+          <div id="loaderOut">
+              <Loader/>
+          </div>
+        </Suspense>:
+        <Suspense fallback={<Loader/>}>
             <Header/>
             <div id="pageArt" style={{backgroundImage: `linear-gradient(rgba(15, 15, 15, 0), rgb(21, 21, 21)), linear-gradient(rgba(21, 21, 21, 0.8), rgba(21, 21, 21, 0.5)), url(${item.image_background})`}}></div>
             <div id="contentBlock">
@@ -94,10 +98,10 @@ class DetailPage extends Component {
                     <div id="itemInfo">
                         <h1 id='itemTitle'>{item.name}</h1>
                         <div className="infoRow">
-                            <h4>Count games: <span className="listItem" key={0}>{item.games_count}</span></h4>
+                            <h4>{t('count')}: <span className="listItem" key={0}>{item.games_count}</span></h4>
                         </div>
                         <div id="textBlock">
-                            <h4 id='aboutTitle'>About {item.name}:</h4>
+                            <h4 id='aboutTitle'>{t('about')} {item.name}:</h4>
 
                             {item.description !== "" ?
                             React.createElement('p', {
@@ -105,7 +109,7 @@ class DetailPage extends Component {
                                 __html: item.description,
                               },
                             }) :
-                            <p>There is no necessary information</p>}
+                            <p>{t('noinfo')}</p>}
                         </div>
                         
                     </div>
@@ -114,11 +118,11 @@ class DetailPage extends Component {
                     </div>
                 </div>
                 <div id="gamesBlock">
-                  <h1>Suitable games</h1>
+                  <h1>{t('suitable')}</h1>
                   <GamesGrid games={this.state.games} titleOn={false} filterOn={false} isLoading={this.state.gameLoading} getData={this.getSuitGame.bind(this)} setState={this.setState.bind(this)} end={this.state.end}/>
                 </div>
             </div>
-        </>
+        </Suspense>
     )
   }
 }
