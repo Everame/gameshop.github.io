@@ -1,5 +1,6 @@
 # Gameshop App
 ![image](https://github.com/Everame/gameshop/assets/28521346/840b206e-2a4b-44e3-95d4-0354817c179f)
+
 ![image](https://github.com/Everame/gameshop/assets/28521346/ab9e1af4-9a46-40d2-99d6-b37dc9ec897c)
 
 Разработка основного функционала: 3 дня
