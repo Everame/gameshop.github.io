@@ -33,5 +33,5 @@ export const router = createBrowserRouter([
         path: '/developers/:slug',
         element: <DetailPage type="developers"/>
     }
-])
+],{ basename: "/gameshop" })
 
