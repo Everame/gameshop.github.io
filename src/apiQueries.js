@@ -1,3 +1,5 @@
+import { useNavigate } from "react-router";
+
 export default class FetchHttpClient {
     constructor(headers){
         this.headers = headers;
@@ -5,7 +7,8 @@ export default class FetchHttpClient {
      
 
     async get(url){
-        return await fetch(url, { method: "GET", headers: this.headers})
+        try {
+            return await fetch(url, { method: "GET", headers: this.headers})
             .then(response => {
                 //Если ответ успешно получен возвращаю его
                 if (response.ok) {
@@ -18,6 +21,8 @@ export default class FetchHttpClient {
                     throw e
                 })
             })
+        } catch (error) {
+        }
     }
 
     async fetch(url, body){

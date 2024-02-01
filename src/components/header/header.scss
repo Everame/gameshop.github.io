@@ -23,25 +23,27 @@
                 }
             }
         }
+        #btnMenu{
+            #langSwitch{
+                svg{
+                    width: calc(var(--index) * 0.8) !important;
+                    height: calc(var(--index) * 0.8) !important;
+                }
+            }
+        }
     }
 }
 @media all and (max-width: 480px) { 
     header{
         #searchField{
+            width: 40% !important;
             #search{
                 padding: calc(var(--index) * 0.5) calc(var(--index) * 2.5) !important;
             }
         }
-    }
-}
-@media all and (max-width: 320px) { 
-    header{
-        #searchField{
-            #searchIcon{
-                left: 10px !important;
-            }
-            #search{
-                padding: calc(var(--index) * 0.5) calc(var(--index) * 2) !important;
+        #btnMenu{
+            #langSwitch{
+                padding: calc(var(--index) * 0.3) !important;
             }
         }
     }
@@ -54,6 +56,22 @@
         }
     }
 }
+
+@media all and (max-width: 320px) { 
+    header{
+        #searchField{
+            width: 30% !important;
+            #searchIcon{
+                left: 10px !important;
+            }
+            #search{
+                padding: calc(var(--index) * 0.5) calc(var(--index) * 2) !important;
+            }
+        }
+    }
+}
+
+
 
 header{
     width: 100%;
