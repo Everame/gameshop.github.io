@@ -55,4 +55,4 @@
 
 ### Приложением можно воспользоваться по этой ссылке
 
-https://everame.github.io/gameshop
+https://tea0fc.github.io/gameshop
